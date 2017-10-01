@@ -1,6 +1,6 @@
 package adapter;
 
-import javax.persistence.criteria.CriteriaBuilder;
+
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class IDAdapter extends XmlAdapter<Integer, Integer> {
