@@ -14,8 +14,6 @@ import static application.BookingApplication.*;
 
 
 @Path("/bookingService")
-@Produces(MediaType.APPLICATION_XML)
-@Consumes(MediaType.APPLICATION_XML)
 public class BookingService {
     @Context
     private ServletContext application;
