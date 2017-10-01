@@ -13,7 +13,7 @@ import java.io.IOException;
 import static application.BookingApplication.*;
 
 
-@Path("/bookingApp")
+@Path("/bookingService")
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
 public class BookingService {
@@ -48,24 +48,24 @@ public class BookingService {
         return getAll().findByStudentEmail(email);
     }
 
-    @Path("bookings/{status}")
+    @Path("bookings")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Bookings getByStatus(@PathParam("status") String status) throws JAXBException, IOException {
+    public Bookings getByStatus(@QueryParam("status") String status) throws JAXBException, IOException {
         return getAll().findByStatus(status);
     }
 
-    @Path("bookings/{subject}")
+    @Path("bookings")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Bookings getBySubject(@PathParam("subject") String subject) throws JAXBException, IOException {
+    public Bookings getBySubject(@QueryParam("subject") String subject) throws JAXBException, IOException {
         return getAll().findBySubject(subject);
     }
 
-    @Path("bookings/{id}")
+    @Path("bookings")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Booking findById(@PathParam("id") Integer id) throws JAXBException, IOException {
+    public Booking findById(@QueryParam("id") Integer id) throws JAXBException, IOException {
         return getAll().findById(id);
     }
 }
