@@ -2,13 +2,7 @@
 <%@ page import="static model.User.*" %>
 <%@ page import="static application.UserApplication.*" %>
 <%@ page import="application.UserApplication" %>
-<%@ page import="model.User" %><%--
-  Created by IntelliJ IDEA.
-  User: might
-  Date: 26/09/2017
-  Time: 11:18 AM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
