@@ -1,6 +1,8 @@
 package model;
 
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import util.DigestUtil;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -12,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * This class represents user in this online application.
  */
 @XmlRootElement(name = "user")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(propOrder = {"name", "email", "password","dateOfBirth", "speciality", "availability"})
 public class User extends BaseModel {
 

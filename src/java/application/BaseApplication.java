@@ -3,12 +3,10 @@ package application;
 import adapter.IDAdapter;
 import jaxblist.BaseJAXBList;
 import org.xml.sax.SAXException;
-import sun.rmi.runtime.Log;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.*;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.*;
@@ -35,6 +33,11 @@ public class BaseApplication<T extends BaseJAXBList> implements Serializable{
         this.items = jaxbList;
     }
 
+    public BaseApplication(String filePath) throws JAXBException, IOException{
+        this();
+        setFilePath(filePath);
+    }
+    
     public BaseApplication(String filePath, String schemaPath) throws JAXBException, IOException {
         this();
         setSchemaPath(schemaPath);

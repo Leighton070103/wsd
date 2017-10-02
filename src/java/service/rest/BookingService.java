@@ -1,16 +1,16 @@
 package service.rest;
 
 import application.BookingApplication;
+import static application.BookingApplication.*;
 import jaxblist.Bookings;
 import model.Booking;
 import javax.servlet.ServletContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import javax.xml.bind.JAXBException;
-
+import javax.xml.bind.JAXBElement;
 import java.io.IOException;
 
-import static application.BookingApplication.*;
 
 
 @Path("/bookingService")
@@ -22,11 +22,10 @@ public class BookingService {
     private BookingApplication getBookingApp() throws IOException, JAXBException{
         synchronized (application){
             BookingApplication bookingApp = (BookingApplication)
-                    application.getAttribute(BOOKING_APP);
+                    application.getAttribute(BOOKING_SERVICE);
             if(bookingApp == null){
-                bookingApp = new BookingApplication();
-                bookingApp.setFilePath(WEB_INF_BOOKINGS_XML);
-                application.setAttribute(BOOKING_APP, bookingApp);
+                bookingApp = new BookingApplication(application.getRealPath(WEB_INF_BOOKINGS_XML));
+                application.setAttribute(BOOKING_SERVICE, bookingApp);
             }
             return bookingApp;
         }
@@ -39,28 +38,21 @@ public class BookingService {
         return getBookingApp().getItems();
     }
 
-    @Path("bookings/{email}")
+    @Path("bookings/searchByEmail")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Bookings getByStuEmail(@PathParam("email") String email) throws JAXBException, IOException {
+    public Bookings getByStuEmail(@QueryParam("email") String email) throws JAXBException, IOException {
         return getAll().findByStudentEmail(email);
     }
 
-    @Path("bookings")
+    @Path("/bookings/{subject}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Bookings getByStatus(@QueryParam("status") String status) throws JAXBException, IOException {
-        return getAll().findByStatus(status);
-    }
-
-    @Path("bookings")
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public Bookings getBySubject(@QueryParam("subject") String subject) throws JAXBException, IOException {
+    public Bookings getBySubject(@PathParam("subject") String subject) throws JAXBException, IOException {
         return getAll().findBySubject(subject);
     }
 
-    @Path("bookings")
+    @Path("bookings/searchById")
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public Booking findById(@QueryParam("id") Integer id) throws JAXBException, IOException {
